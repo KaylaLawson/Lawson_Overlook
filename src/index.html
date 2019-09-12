@@ -1,0 +1,39 @@
+<html>
+  <body>
+    <p class='todays-date'>Todays Date: <span id='currentDate'></span></p>
+    <form class="search-date">
+      <input type="text" id="searchDay" placeholder="dd">
+      <input type="text" id="searchMonth" placeholder="mm">
+      <input type="text" id="searchYear" placeholder="yyyy">
+      <button type="submit">blah</button>
+    </form>
+    
+    <container class="daily-view">
+      <p class="daily-label">rooms available<span class="daily-stat" id="roomsAvail"></span></p>
+      <p class="daily-label">occupancy<span class="daily-stat" id="occupancy"></span> </p>
+      <p class="daily-label">total rev<span class="daily-stat" id="revenueToday"></span> </p>
+    </container>
+    
+    <main>
+      <container class="tabbed-sections">
+
+        <nav class="tabs">
+          <button class="tab-btn main" id="main">MAIN</button>
+          <button class="tab-btn guests" id="guests">CUSTOMERS/GUESTS</button>
+          <button class="tab-btn rooms" id="rooms">ROOMS</button>
+          <button class="tab-btn services" id="services">ORDERS/SERVICES</button>
+        </nav>
+
+        <section class="content guests" id="guestsContent">
+        </section>
+
+        <section class="content rooms" id="roomsContent">
+        </section>
+
+        <section class="content services" id="servicesContent">
+        </section>
+      </container>
+
+    </main>
+  </body>
+</html>
