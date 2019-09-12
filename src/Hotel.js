@@ -11,6 +11,14 @@ class Hotel {
     this.date = '';
   }
 
+  findDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0')
+    let yyyy= today.getFullYear();
+    this.date = `${yyyy}/${mm}/${dd}`;
+  }
+
   startHotel() {
     let room = new Rooms();
     let guest = new Guests();

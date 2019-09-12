@@ -6,14 +6,15 @@ import Hotel from './Hotel';
 
 $( document ).ready(function() {
   let hotel = new Hotel()
-
+  hotel.findDate();
+  domUpdates.displayTodaysDate(hotel.date); 
+  
   getGuests();
   getRooms();
   getBookings();
   getServices();
 
-  domUpdates.displayTodaysDate(); 
-  
+
 function getGuests() {
    fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(response => response.json())

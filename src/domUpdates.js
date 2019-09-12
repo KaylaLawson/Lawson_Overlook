@@ -1,9 +1,12 @@
 import $ from 'jquery'; 
 
+
 const domUpdates = {
 
-  displayTodaysDate() {
-    $('#currentDate').text('bunt cake')
+  displayTodaysDate(date) {
+   
+
+    $('#currentDate').text(date)
   }, 
 
   displayRoomsAvailable() {
