@@ -5,25 +5,32 @@ import Services from './Services';
 
 class Hotel {
   constructor() {
-    this.guests = [];
-    this.bookings = [];
-    this.rooms = [];
-    this.date = '';
+    this.guests = null;
+    this.bookings = null;
+    this.rooms = null;
+    this.services = null;
+    this.date = ' ';
+    this.displayDate = ' ';
   }
 
   findDate() {
+    let allMonths = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec']
+
     let today = new Date();
+    
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0')
     let yyyy= today.getFullYear();
     this.date = `${yyyy}/${mm}/${dd}`;
+    
+    this.displayDate = `${allMonths[today.getMonth()]} ${today.getDate()}, ${yyyy}`
   }
 
   startHotel() {
-    let room = new Rooms();
-    let guest = new Guests();
-    let booking = new Bookings();
-    let service = new Services(); 
+    this.rooms = new Rooms();
+    this.guests = new Guests();
+    this.bookings = new Bookings();
+    this.services = new Services(); 
   }
 
   getGuests() {

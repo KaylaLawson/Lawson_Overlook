@@ -6,35 +6,36 @@ import Hotel from './Hotel';
 
 $( document ).ready(function() {
   let hotel = new Hotel()
+  hotel.startHotel();
   hotel.findDate();
-  domUpdates.displayTodaysDate(hotel.date); 
-  
+  domUpdates.displayTodaysDate(hotel.displayDate); 
+
   getGuests();
-  getRooms();
-  getBookings();
+  // getRooms();
+  // getBookings();
   getServices();
 
 
-function getGuests() {
+// function getGuests() {
    fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(response => response.json())
     .then(guestData => console.log(guestData))
     .catch(error => console.log(error))
-}
+// }
 
-function getRooms() {
+// function getRooms() {
   fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
     .then(promise => promise.json())
-    .then(roomData => console.log(roomData))
+    .then(roomData => hotel.rooms.storeRoomData(roomData))
     .catch(error => console.log(error))
-}
+// }
 
-function getBookings() {
+// function getBookings() {
   fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
     .then(promise => promise.json())
-    .then(roomData => console.log(roomData))
+    .then(bookingsData =>  hotel.bookings.storeBookingData(bookingsData))
     .catch(error => console.log(error))
-}
+// }
 
 function getServices() {
   fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices')

@@ -1,6 +1,11 @@
 class Rooms {
-  constructor(roomData) {
-    this.roomData = roomData;
+  constructor() {
+    this.roomData = null;
+  }
+
+  storeRoomData(newRoomData) {
+    console.log('Rooms Class: ', newRoomData);
+    this.roomData = newRoomData;
   }
 }
 

@@ -2,11 +2,8 @@ import $ from 'jquery';
 
 
 const domUpdates = {
-
-  displayTodaysDate(date) {
-   
-
-    $('#currentDate').text(date)
+  displayTodaysDate(todaysDate) {
+    $('#currentDate').text(todaysDate)
   }, 
 
   displayRoomsAvailable() {
