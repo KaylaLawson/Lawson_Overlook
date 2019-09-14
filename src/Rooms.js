@@ -1,12 +1,17 @@
 class Rooms {
-  constructor() {
-    this.roomData = null;
+  constructor(rooms) {
+    this.roomData = rooms;
+
   }
 
-  storeRoomData(newRoomData) {
-    console.log('Rooms Class: ', newRoomData);
-    this.roomData = newRoomData;
+  findRoomType() {
+
   }
+
+  findRoomNumber() {
+
+  }
+
 }
 
 export default Rooms;

@@ -1,8 +1,7 @@
 class Services {
-  constructor(servicesData) {
-    this.servicesData = servicesData;
+  constructor(services) {
+    this.servicesData = services;
   }
-
 }
 
 export default Services;

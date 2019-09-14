@@ -1,20 +1,17 @@
 class Bookings {
-  constructor() {
-    this.bookingsData = null;
-  }
-
-  storeBookingData(newBookingData) {
-    console.log('Bookings Class: ', newBookingData)
-    this.bookingsData = newBookingData
+  constructor(bookings) {
+    this.bookingsData = bookings
   }
 
   createNewBooking() {
 
   }
 
-  updateBooking() {
-
+  cancelBooking() {
+    
   }
+
+  
 }
 
 export default Bookings;

@@ -1,8 +1,8 @@
 class Guests {
-  constructor(userData) {
-    this.guestData = userData;
+  constructor(guests) {
+    this.guestData = guests;
   }
-
+  
   createNewGuest() {
 
   }

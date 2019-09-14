@@ -8,6 +8,7 @@ const domUpdates = {
 
   displayRoomsAvailable() {
     // Total Rooms Available for today's date
+    $('')
    
   }, 
 

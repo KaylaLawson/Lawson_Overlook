@@ -4,47 +4,53 @@ import domUpdates from './domUpdates.js';
 import Hotel from './Hotel';
 
 
-$( document ).ready(function() {
+$( document ).ready(async function () {
   let hotel = new Hotel()
-  hotel.startHotel();
-  hotel.findDate();
-  domUpdates.displayTodaysDate(hotel.displayDate); 
+  hotel.startHotel(await getGuests(), await getRooms(), await getBookings(), await getServices())
+  console.log(hotel)
 
-  getGuests();
-  // getRooms();
-  // getBookings();
-  getServices();
-
-
-// function getGuests() {
-   fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
-    .then(response => response.json())
-    .then(guestData => console.log(guestData))
-    .catch(error => console.log(error))
-// }
-
-// function getRooms() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
-    .then(promise => promise.json())
-    .then(roomData => hotel.rooms.storeRoomData(roomData))
-    .catch(error => console.log(error))
-// }
-
-// function getBookings() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
-    .then(promise => promise.json())
-    .then(bookingsData =>  hotel.bookings.storeBookingData(bookingsData))
-    .catch(error => console.log(error))
-// }
-
-function getServices() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices')
-    .then(promise => promise.json()) 
-    .then(serviceData => console.log(serviceData))
-    .catch(error => console.log(error))
+async function getGuests() {
+  try {
+   let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+   const data = await response.json()
+    return data.users
+  } catch (error) {
+    console.log(error);
+  }
 }
 
+async function getRooms() {
+  try {
+  let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+    const data = await response.json()
+    return data.rooms
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+async function getBookings() {
+  try {
+  let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings');
+      const data = await response.json()
+       return data.bookings
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getServices() {
+  try {
+    let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices')
+      const data = await response.json() 
+      return data.roomServices
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+  hotel.findDate();
+  domUpdates.displayTodaysDate(hotel.displayDate); 
 
 const $navBtn =$('.tab-btn');
 

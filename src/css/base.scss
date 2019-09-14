@@ -1,6 +1,22 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+@import 'colors';
+@import 'variables';
+
+* {box-sizing: border-box; margin: 0; padding: 0; };
+
+
+aside {
+  background-color: $sideNav;
+  height: 100vh;
+  padding: 20px;
+  font-size: 1.5rem;
+
+  .daily-view {
+    
+  }
+}
+
 
 body {
-  background-color: $primary-background;
+  background-color: $primaryBg;
+  display: flex;
 }
