@@ -6,10 +6,9 @@ const domUpdates = {
     $('#currentDate').text(todaysDate)
   }, 
 
-  displayRoomsAvailable() {
+  displayRoomsAvailable(roomsAvailable) {
     // Total Rooms Available for today's date
-    $('')
-   
+    $('#roomsAvail').text(roomsAvailable)
   }, 
 
   displayTodaysRevenue() {
@@ -19,6 +18,19 @@ const domUpdates = {
   displaPercentageOfRoomsOccupied() {
     // - Percentage of rooms occupied for today's date
 
+  },
+
+  displayServices(services) {
+    services.forEach(service => {
+      $('#servicesContent').append(`<p>${service.totalCost}</p>`)
+    })
+  }, 
+
+  displayBookings(bookings) {
+    $('.content-bookings').empty()
+    bookings.forEach(booking => {
+      $('#bookingsContent').append(`<p>${booking.date}</p>`)
+    })
   }
 
 }

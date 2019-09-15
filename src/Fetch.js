@@ -1,7 +1,6 @@
-
 export const getGuests = async () => {
   try {
-   let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+   const response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
    const data = await response.json()
     return data.users
   } catch (error) {
@@ -11,7 +10,7 @@ export const getGuests = async () => {
 
 export const getRooms = async () => {
   try {
-  let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
     const data = await response.json()
     return data.rooms
   } catch (error) {
@@ -21,7 +20,7 @@ export const getRooms = async () => {
 
 export const getBookings = async () => {
   try {
-  let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings');
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings');
       const data = await response.json()
        return data.bookings
   } catch (error) {
@@ -31,7 +30,7 @@ export const getBookings = async () => {
 
 export const getServices = async () => {
   try {
-    let response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices')
+    const response = await fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices')
       const data = await response.json() 
       return data.roomServices
   } catch (error) {

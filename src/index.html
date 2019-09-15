@@ -10,7 +10,7 @@
       <p class='todays-date daily-view'>Todays Date: <span id='currentDate'></span></p>
       <form class="search-date daily-view">
         <input type="date" id="searchDate" >
-        <button type="submit">blah</button>
+        <button id="selectedDate" type="submit">blah</button>
       </form>
         <p class="daily-label daily-view">rooms available<span class="daily-stat" id="roomsAvail"></span></p>
         <p class="daily-label daily-view">occupancy<span class="daily-stat" id="occupancy"></span> </p>
@@ -20,18 +20,17 @@
     <main>
       <container class="tabbed-sections">
         <nav class="tabs">
-          <button class="tab-btn main" id="main">MAIN</button>
-          <button class="tab-btn guests" id="guests">CUSTOMERS/GUESTS</button>
-          <button class="tab-btn rooms" id="rooms">ROOMS</button>
-          <button class="tab-btn services" id="services">ORDERS/SERVICES</button>
+          <button class="tab-btn guests" id="guests">GUESTS</button>
+          <button class="tab-btn bookings" id="bookings">ROOMS</button>
+          <button class="tab-btn services" id="services">SERVICES</button>
         </nav>
-        <section class="content guests" id="guestsContent">
+        <section class="content-guests" id="guestsContent">
         </section>
 
-        <section class="content rooms" id="roomsContent">
+        <section class="content-bookings" id="bookingsContent">
         </section>
 
-        <section class="content services" id="servicesContent">
+        <section class="content-services" id="servicesContent">
         </section>
       </container>
 
