@@ -21,15 +21,23 @@ const domUpdates = {
   },
 
   displayServices(services) {
+    $('#content').empty()
     services.forEach(service => {
-      $('#servicesContent').append(`<p>${service.totalCost}</p>`)
+      $('#content').append(`<p>${service.totalCost}</p>`)
     })
   }, 
 
   displayBookings(bookings) {
-    $('.content-bookings').empty()
+    $('#content').empty()
     bookings.forEach(booking => {
-      $('#bookingsContent').append(`<p>${booking.date}</p>`)
+      $('#content').append(`<p>${booking.date}</p>`)
+    })
+  },
+
+  displayGuests(guests) {
+    $('#content').empty()
+    guests.forEach(guest => {
+      $('#content').append(`<p>${guest.name}</p>`)
     })
   }
 

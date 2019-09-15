@@ -42,5 +42,9 @@ class Hotel {
   bookingsByDate(date) {
     return this.bookings.filter(booking => booking.date === date)
   }
+
+  guestsByName(name) {
+    return this.guests.filter(guest => guest.name.toLowerCase().includes(name.toLowerCase()))
+  }
 }
 export default Hotel;

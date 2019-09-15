@@ -12,15 +12,13 @@ $( document ).ready(async function () {
   hotel.findDate();
   domUpdates.displayTodaysDate(hotel.displayDate); 
   domUpdates.displayTodaysDate(hotel.findRoomsAvailable())
-  // domUpdates.displayServices(hotel.servicesByDate(hotel.todaysDate))
-  // domUpdates.displayBookings(hotel.bookingsByDate(hotel.todaysDate))
   
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
   const tabs = {
     services: () => domUpdates.displayServices(hotel.servicesByDate(hotel.selectedDate || hotel.todaysDate)),
     bookings: () => domUpdates.displayBookings(hotel.bookingsByDate(hotel.selectedDate || hotel.todaysDate)),
-    guests: () => {console.log("guests")},
+    guests: () => domUpdates.displayGuests(hotel.guests),
   }
 
   $navBtn.click((e) => {
@@ -30,6 +28,14 @@ $( document ).ready(async function () {
   $dateSubmit.click((e) => {
     e.preventDefault()
     hotel.selectedDate = $('#searchDate').val().replace(/-/g, "/");
+  })
+  
+  $('.guest-search').keyup( (e) => {
+    if ($('.guest-search').val() === ""){
+      tabs.guests()
+    } else {
+      domUpdates.displayGuests(hotel.guestsByName($('.guest-search').val()))
+    }
   })
 
 });
