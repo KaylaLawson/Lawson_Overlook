@@ -31,8 +31,20 @@ class Hotel {
     this.services = this.services.map(service => new Service(service)); 
   }
   
+  
   findRoomsAvailable() {
-   
+    let rooms = this.rooms;
+    let bookedDates = this.bookingsByDate(this.selectedDate || this.todaysDate)
+    let bookedRooms = bookedDates.map(booking => booking.roomNumber);
+    let available = rooms.filter(room => bookedRooms.includes(room.number) === false);
+    return available;
+  }
+
+  totalRevenueForDate() {
+   let serviceDates = this.servicesByDate(this.selectedDate || this.todaysDate)
+   let filteredCosts = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
+   return filteredCosts
+
   }
 
   servicesByDate(date) {

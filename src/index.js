@@ -6,13 +6,14 @@ import { getGuests, getRooms, getBookings, getServices } from './Fetch.js';
 
 $( document ).ready(async function () {
   let hotel = new Hotel(await getGuests(), await getRooms(), await getBookings(), await getServices())
-  // hotel.startHotel(await getGuests(), await getRooms(), await getBookings(), await getServices())
   console.log(hotel)
   hotel.startHotel()
   hotel.findDate();
   domUpdates.displayTodaysDate(hotel.displayDate); 
-  domUpdates.displayTodaysDate(hotel.findRoomsAvailable())
-  
+  domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length)
+  domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
+
+
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
   const tabs = {
@@ -28,6 +29,8 @@ $( document ).ready(async function () {
   $dateSubmit.click((e) => {
     e.preventDefault()
     hotel.selectedDate = $('#searchDate').val().replace(/-/g, "/");
+    domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length);
+    domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
   })
   
   $('.guest-search').keyup( (e) => {

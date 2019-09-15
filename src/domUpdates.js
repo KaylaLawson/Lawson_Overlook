@@ -7,15 +7,15 @@ const domUpdates = {
   }, 
 
   displayRoomsAvailable(roomsAvailable) {
-    // Total Rooms Available for today's date
     $('#roomsAvail').text(roomsAvailable)
+    
   }, 
 
-  displayTodaysRevenue() {
-    // - Total revenue for today's date
+  displayTodaysRevenue(totalRev) {
+    $('#revenueToday').text(totalRev)
   }, 
 
-  displaPercentageOfRoomsOccupied() {
+  displayPercentageOfRoomsOccupied() {
     // - Percentage of rooms occupied for today's date
 
   },
@@ -23,21 +23,31 @@ const domUpdates = {
   displayServices(services) {
     $('#content').empty()
     services.forEach(service => {
-      $('#content').append(`<p>${service.totalCost}</p>`)
+      $('#content').append( `
+      <section class="service-container">
+        <p>Food Order: ${service.food}</p>
+        <p>Price: $${service.totalCost}</p>
+      </section> `)
     })
   }, 
 
   displayBookings(bookings) {
     $('#content').empty()
     bookings.forEach(booking => {
-      $('#content').append(`<p>${booking.date}</p>`)
+      $('#content').append( `
+      <section class="bookings-section">
+        <p class="bg1">${booking.date}</p>
+        <p class="bg2">Room Number: ${booking.roomNumber}</p>
+      </section> `)
     })
   },
 
   displayGuests(guests) {
     $('#content').empty()
     guests.forEach(guest => {
-      $('#content').append(`<p>${guest.name}</p>`)
+      $('#content').append( `
+        <p class="guest-section">${guest.name}</p>
+       `)
     })
   }
 
