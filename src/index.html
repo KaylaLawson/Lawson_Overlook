@@ -1,13 +1,32 @@
-<!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
-  </head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>OverLook</title>
+    </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    <aside>
+      <p class='todays-date daily-view'>Today <span id='currentDate'></span></p>
+      <form class="search-date daily-view">
+        <input type="date" id="searchDate" >
+        <button id="selectedDate" type="submit">blah</button>
+      </form>
+        <p class="daily-view">Rooms Available: <span class="daily-stat" id="roomsAvail"></span></p>
+        <p class="daily-view">Total Sales From Services: $<span class="daily-stat" id="revenueToday"></span> </p>
+        <p class="daily-view">occupancy: <span class="daily-stat" id="occupancy"></span> </p>
+        <input class="guest-search" type="text" placeholder="Search Guest">
+        <button id="add-guest">Add Guest +</button>
+    </aside>
+    
+    <main>
+        <nav class="tabs">
+          <button class="tab-btn guests" id="guests">GUESTS</button>
+          <button class="tab-btn bookings" id="bookings">BOOKINGS</button>
+          <button class="tab-btn services" id="services">SERVICES</button>
+        </nav>
+        <section class="content" id="content" >
+        </section>
+    </main>
   </body>
 </html>

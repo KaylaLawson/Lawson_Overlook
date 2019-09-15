@@ -1,13 +1,46 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import domUpdates from './domUpdates.js';
+import Hotel from './Hotel';
+import { getGuests, getRooms, getBookings, getServices } from './Fetch.js';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+$( document ).ready(async function () {
+  let hotel = new Hotel(await getGuests(), await getRooms(), await getBookings(), await getServices())
+  console.log(hotel)
+  hotel.startHotel()
+  hotel.findDate();
+  domUpdates.displayTodaysDate(hotel.displayDate); 
+  domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length)
+  domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
+  domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
 
-console.log('This is the JavaScript entry file - your code begins here.');
+
+  const $navBtn =$('.tab-btn');
+  const $dateSubmit = $('#selectedDate')
+  const tabs = {
+    services: () => domUpdates.displayServices(hotel.servicesByDate(hotel.selectedDate || hotel.todaysDate)),
+    bookings: () => domUpdates.displayBookings(hotel.bookingsByDate(hotel.selectedDate || hotel.todaysDate)),
+    guests: () => domUpdates.displayGuests(hotel.guests),
+  }
+
+  $navBtn.click((e) => {
+    tabs[e.target.id]()
+  })
+
+  $dateSubmit.click((e) => {
+    e.preventDefault()
+    hotel.selectedDate = $('#searchDate').val().replace(/-/g, "/");
+    domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length);
+    domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
+    domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
+  })
+  
+  $('.guest-search').keyup( (e) => {
+    if ($('.guest-search').val() === ""){
+      tabs.guests()
+    } else {
+      domUpdates.displayGuests(hotel.guestsByName($('.guest-search').val()))
+    }
+  })
+
+});
