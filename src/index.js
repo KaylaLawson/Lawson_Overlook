@@ -12,6 +12,7 @@ $( document ).ready(async function () {
   domUpdates.displayTodaysDate(hotel.displayDate); 
   domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length)
   domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
+  domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
 
 
   const $navBtn =$('.tab-btn');
@@ -31,6 +32,7 @@ $( document ).ready(async function () {
     hotel.selectedDate = $('#searchDate').val().replace(/-/g, "/");
     domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length);
     domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
+    domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
   })
   
   $('.guest-search').keyup( (e) => {

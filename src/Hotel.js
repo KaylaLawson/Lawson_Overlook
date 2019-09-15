@@ -41,10 +41,15 @@ class Hotel {
   }
 
   totalRevenueForDate() {
-   let serviceDates = this.servicesByDate(this.selectedDate || this.todaysDate)
-   let filteredCosts = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
-   return filteredCosts
+    let serviceDates = this.servicesByDate(this.selectedDate || this.todaysDate);
+    let filteredCosts = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
+    return filteredCosts
+  }
 
+  percentageOfRoomsOccupied() {
+    let rooms = this.rooms
+    let roomsOccupied = rooms.length - this.findRoomsAvailable().length;
+    return Math.floor((roomsOccupied / rooms.length) * 100) + '%'
   }
 
   servicesByDate(date) {
@@ -56,7 +61,7 @@ class Hotel {
   }
 
   guestsByName(name) {
-    return this.guests.filter(guest => guest.name.toLowerCase().includes(name.toLowerCase()))
+    return this.guests.filter(guest => guest.name.toLowerCase().includes(name.toLowerCase()) && guest.id )
   }
 }
 export default Hotel;

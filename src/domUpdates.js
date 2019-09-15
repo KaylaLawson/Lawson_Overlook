@@ -15,8 +15,9 @@ const domUpdates = {
     $('#revenueToday').text(totalRev)
   }, 
 
-  displayPercentageOfRoomsOccupied() {
+  displayPercentageOfRoomsOccupied(occ) {
     // - Percentage of rooms occupied for today's date
+    $('#occupancy').text(occ)
 
   },
 
