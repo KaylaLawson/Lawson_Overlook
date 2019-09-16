@@ -2,8 +2,11 @@ import $ from 'jquery';
 
 
 const domUpdates = {
-  displayTodaysDate(todaysDate) {
-    $('#currentDate').text(todaysDate)
+  displayTodaysDate(today) {
+    const date = new Date(today)
+    const allMonths = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec']
+    const displayDate = `${allMonths[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+    $('#currentDate').text(displayDate)
   }, 
 
   displayRoomsAvailable(roomsAvailable) {
@@ -25,10 +28,9 @@ const domUpdates = {
     $('#content').empty()
     services.forEach(service => {
       $('#content').append( `
-      <section class="service-container">
         <p>Food Order: ${service.food}</p>
         <p>Price: $${service.totalCost}</p>
-      </section> `)
+       `)
     })
   }, 
 
@@ -47,7 +49,7 @@ const domUpdates = {
     $('#content').empty()
     guests.forEach(guest => {
       $('#content').append( `
-        <p class="guest-section">${guest.name}</p>
+        <p class="guest-tab" id=${guest.id}>${guest.name}</p>
        `)
     })
   }

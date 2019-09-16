@@ -9,7 +9,7 @@ $( document ).ready(async function () {
   console.log(hotel)
   hotel.startHotel()
   hotel.findDate();
-  domUpdates.displayTodaysDate(hotel.displayDate); 
+  domUpdates.displayTodaysDate(hotel.selectedDate)
   domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length)
   domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
   domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
@@ -18,13 +18,22 @@ $( document ).ready(async function () {
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
   const tabs = {
-    services: () => domUpdates.displayServices(hotel.servicesByDate(hotel.selectedDate || hotel.todaysDate)),
-    bookings: () => domUpdates.displayBookings(hotel.bookingsByDate(hotel.selectedDate || hotel.todaysDate)),
+    services: () => domUpdates.displayServices(hotel.servicesByDate(hotel.selectedDate)),
+    bookings: () => domUpdates.displayBookings(hotel.bookingsByDate(hotel.selectedDate)),
+    guests: () => domUpdates.displayGuests(hotel.guests),
+  }
+  const guestTabs = {
+    services: () => domUpdates.displayServices(hotel.servicesByID(hotel.selectedCustomer.id)),
+    bookings: () => domUpdates.displayBookings(hotel.bookingsByID(hotel.selectedCustomer.id)),
     guests: () => domUpdates.displayGuests(hotel.guests),
   }
 
   $navBtn.click((e) => {
-    tabs[e.target.id]()
+    if (hotel.selectedCustomer !== null) {
+      guestTabs[e.target.id]()
+    } else {
+      tabs[e.target.id]()
+    }
   })
 
   $dateSubmit.click((e) => {
@@ -43,4 +52,25 @@ $( document ).ready(async function () {
     }
   })
 
+  $('.content').click(e => {
+    if (e.target.classList.contains('guest-tab')) {
+      hotel.selectedCustomer = hotel.getGuestByID(parseInt(e.target.id))
+      console.log(hotel)
+    }
+  })
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+

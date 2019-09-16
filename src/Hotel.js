@@ -2,6 +2,7 @@ import Guest from './Guest';
 import Room from './Room';
 import Booking from './Booking';
 import Service from './Service';
+import domUpdates from './domUpdates';
 
 class Hotel {
   constructor(guests, rooms, bookings, services) {
@@ -9,19 +10,16 @@ class Hotel {
     this.rooms = rooms;
     this.bookings = bookings;
     this.services = services;
-    this.todaysDate = '';
     this.selectedDate = '';
-    this.displayDate = '';
+    this.selectedCustomer = null;
   }
 
   findDate() {
-    let allMonths = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec']
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0')
-    let yyyy= today.getFullYear();
-    this.todaysDate = `${yyyy}/${mm}/${dd}`;
-    this.displayDate = `${allMonths[today.getMonth()]} ${today.getDate()}, ${yyyy}`
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0')
+    const yyyy = today.getFullYear();
+    this.selectedDate = `${yyyy}/${mm}/${dd}`;
   }
 
   startHotel() {
@@ -33,23 +31,24 @@ class Hotel {
   
   
   findRoomsAvailable() {
-    let rooms = this.rooms;
-    let bookedDates = this.bookingsByDate(this.selectedDate || this.todaysDate)
-    let bookedRooms = bookedDates.map(booking => booking.roomNumber);
-    let available = rooms.filter(room => bookedRooms.includes(room.number) === false);
+    const rooms = this.rooms;
+    const bookedDates = this.bookingsByDate(this.selectedDate)
+    const bookedRooms = bookedDates.map(booking => booking.roomNumber);
+    const available = rooms.filter(room => bookedRooms.includes(room.number) === false);
     return available;
   }
 
   totalRevenueForDate() {
-    let serviceDates = this.servicesByDate(this.selectedDate || this.todaysDate);
-    let filteredCosts = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
-    return filteredCosts
+    const serviceDates = this.servicesByDate(this.selectedDate);
+    const filteredCostsForServices = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
+    const filteredCostForRooms = this.rooms.reduce((acc, currElem ) => acc += currElem.costPerNight, 0);
+    return (filteredCostsForServices + filteredCostForRooms).toFixed(2)
   }
 
   percentageOfRoomsOccupied() {
-    let rooms = this.rooms
-    let roomsOccupied = rooms.length - this.findRoomsAvailable().length;
-    return Math.floor((roomsOccupied / rooms.length) * 100) + '%'
+    const roomsLen = this.rooms.length
+    const roomsOccupied = roomsLen - this.findRoomsAvailable().length;
+    return Math.floor((roomsOccupied / roomsLen) * 100) + '%'
   }
 
   servicesByDate(date) {
@@ -61,7 +60,19 @@ class Hotel {
   }
 
   guestsByName(name) {
-    return this.guests.filter(guest => guest.name.toLowerCase().includes(name.toLowerCase()) && guest.id )
+    return this.guests.filter(guest => guest.name.toLowerCase().includes(name.toLowerCase()))
+  }
+
+  getGuestByID(id) {
+    return this.guests.find(guest => guest.id === id)
+  }
+
+  servicesByID (id) {
+    return this.services.filter(service => service.userID === id)
+  }
+
+  bookingsByID (id) {
+    return this.bookings.filter(booking => booking.userID === id)
   }
 }
 export default Hotel;
