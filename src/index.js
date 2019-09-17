@@ -2,29 +2,31 @@ import $ from 'jquery';
 import './css/base.scss';
 import domUpdates from './domUpdates.js';
 import Hotel from './Hotel';
+import Control from'./Control';
 import { getGuests, getRooms, getBookings, getServices } from './Fetch.js';
 
 $( document ).ready(async function () {
   let hotel = new Hotel(await getGuests(), await getRooms(), await getBookings(), await getServices())
+  let control = new Control();
   console.log(hotel)
   hotel.startHotel()
-  hotel.findDate();
+  hotel.changeDate(control.findDate());
   domUpdates.displayTodaysDate(hotel.selectedDate)
-  domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length)
-  domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
-  domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
+  domUpdates.displayRoomsAvailable(control.findRoomsAvailable(hotel.rooms, hotel.bookings, hotel.selectedDate).length);
+  domUpdates.displayTodaysRevenue(control.totalRevenueForDate(hotel.rooms, hotel.services, hotel.bookings, hotel.selectedDate));
+  domUpdates.displayPercentageOfRoomsOccupied(control.percentageOfRoomsOccupied(hotel.rooms, hotel.bookings, hotel.selectedDate));
 
 
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
   const tabs = {
-    services: () => domUpdates.displayServices(hotel.servicesByDate(hotel.selectedDate)),
-    bookings: () => domUpdates.displayBookings(hotel.bookingsByDate(hotel.selectedDate)),
+    services: () => domUpdates.displayServices(control.servicesByDate(hotel.services, hotel.selectedDate)),
+    bookings: () => domUpdates.displayBookings(control.bookingsByDate(hotel.bookings, hotel.selectedDate)),
     guests: () => domUpdates.displayGuests(hotel.guests),
   }
   const guestTabs = {
-    services: () => domUpdates.displayServices(hotel.servicesByID(hotel.selectedCustomer.id)),
-    bookings: () => domUpdates.displayBookings(hotel.bookingsByID(hotel.selectedCustomer.id)),
+    services: () => domUpdates.displayServices(control.servicesByID(hotel.services, hotel.selectedCustomer.id)),
+    bookings: () => domUpdates.displayBookings(control.bookingsByID(hotel.bookings, hotel.selectedCustomer.id)),
     guests: () => domUpdates.displayGuests(hotel.guests),
   }
 
@@ -39,22 +41,22 @@ $( document ).ready(async function () {
   $dateSubmit.click((e) => {
     e.preventDefault()
     hotel.selectedDate = $('#searchDate').val().replace(/-/g, "/");
-    domUpdates.displayRoomsAvailable(hotel.findRoomsAvailable().length);
-    domUpdates.displayTodaysRevenue(hotel.totalRevenueForDate());
-    domUpdates.displayPercentageOfRoomsOccupied(hotel.percentageOfRoomsOccupied());
+    domUpdates.displayRoomsAvailable(control.findRoomsAvailable(hotel.rooms, hotel.bookings, hotel.selectedDate).length);
+    domUpdates.displayTodaysRevenue(control.totalRevenueForDate(hotel.rooms, hotel.services, hotel.bookings, hotel.selectedDate));
+    domUpdates.displayPercentageOfRoomsOccupied(control.percentageOfRoomsOccupied(hotel.rooms, hotel.bookings, hotel.selectedDate));
   })
   
   $('.guest-search').keyup( (e) => {
     if ($('.guest-search').val() === ""){
       tabs.guests()
     } else {
-      domUpdates.displayGuests(hotel.guestsByName($('.guest-search').val()))
+      domUpdates.displayGuests(control.guestsByName(hotel.guests, $('.guest-search').val()))
     }
   })
 
   $('.content').click(e => {
     if (e.target.classList.contains('guest-tab')) {
-      hotel.selectedCustomer = hotel.getGuestByID(parseInt(e.target.id))
+      hotel.selectedCustomer = control.getGuestByID(hotel.guests, parseInt(e.target.id))
       console.log(hotel)
     }
   })

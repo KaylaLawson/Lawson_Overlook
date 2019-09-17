@@ -11,7 +11,6 @@ const domUpdates = {
 
   displayRoomsAvailable(roomsAvailable) {
     $('#roomsAvail').text(roomsAvailable)
-    
   }, 
 
   displayTodaysRevenue(totalRev) {
@@ -38,10 +37,9 @@ const domUpdates = {
     $('#content').empty()
     bookings.forEach(booking => {
       $('#content').append( `
-      <section class="bookings-section">
         <p class="bg1">${booking.date}</p>
         <p class="bg2">Room Number: ${booking.roomNumber}</p>
-      </section> `)
+       `)
     })
   },
 
