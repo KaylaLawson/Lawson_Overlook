@@ -19,6 +19,7 @@ $( document ).ready(async function () {
 
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
+  const $addGuest = $('#add-guest')
   const tabs = {
     services: () => domUpdates.displayServices(control.servicesByDate(hotel.services, hotel.selectedDate)),
     bookings: () => domUpdates.displayBookings(control.bookingsByDate(hotel.bookings, hotel.selectedDate)),
@@ -46,6 +47,10 @@ $( document ).ready(async function () {
     domUpdates.displayPercentageOfRoomsOccupied(control.percentageOfRoomsOccupied(hotel.rooms, hotel.bookings, hotel.selectedDate));
   })
   
+  $addGuest.click((e)=>{
+    domUpdates.displayCustomerForm() 
+  })
+
   $('.guest-search').keyup( (e) => {
     if ($('.guest-search').val() === ""){
       tabs.guests()
@@ -55,9 +60,18 @@ $( document ).ready(async function () {
   })
 
   $('.content').click(e => {
+    e.preventDefault();
     if (e.target.classList.contains('guest-tab')) {
       hotel.selectedCustomer = control.getGuestByID(hotel.guests, parseInt(e.target.id))
+      domUpdates.displaySelectedGuest(hotel.selectedCustomer)
       console.log(hotel)
+    } else if (e.target.classList.contains('add-guest')) {
+      const name = $('#newGuest').val()
+      hotel.addCustomer(name)
+      domUpdates.displaySelectedGuest(hotel.selectedCustomer)
+    } else if (e.target.classList.contains('remove-guest')) {
+      hotel.removeCustomer(parseInt(e.target.id))
+      domUpdates.displayGuests(control.guestsByName(hotel.guests, $('.guest-search').val()))
     }
   })
 

@@ -3,6 +3,7 @@
 @import 'services';
 @import 'tabs';
 @import 'bookings';
+@import 'guests';
 
 * {box-sizing: border-box; margin: 0; padding: 0; };
 
@@ -11,12 +12,18 @@ aside {
   background-color: $sideNav;
   padding: 20px;
   font-size: 1.5rem;
-  
+  width: 40%;
+
+  .daily-view {
+    margin: 20px 0;
+  }
+
   #currentDate {
     color: #fff;
     display: block;
     font-size: 1.5rem;
   }
+
 }
 
 body {
@@ -25,7 +32,7 @@ body {
 }
 
 main {
-  width: 75%;
+  width: 100%;
 }
 
 

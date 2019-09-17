@@ -32,7 +32,7 @@ class Control {
     return Math.floor((roomsOccupied / rooms.length) * 100) + '%'
   }
 
-  // Should refactor this
+  // Should refactor these
   servicesByDate(services, date) {
     return services.filter(service => service.date === date)
   }

@@ -25,6 +25,15 @@ class Hotel {
     this.services = this.services.map(service => new Service(service)); 
   }
   
-  
+  addCustomer(name) {
+    const newGuest = new Guest({ id: this.guests.length + 1 , name  })
+    this.guests.push(newGuest);
+    this.selectedCustomer = newGuest;
+  }
+
+  removeCustomer(id) {
+    const newGuests = this.guests.filter(guest => guest.id !== id)
+    this.guests = newGuests;
+  }
 }
 export default Hotel;
