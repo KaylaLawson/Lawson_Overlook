@@ -14,5 +14,11 @@ ul {
   .remove-guest {
     margin: 5px;
     border-radius: 25px;
+    background: $guestBtn;
+    color: white;
+  }
+  .remove-guest:hover {
+    background: white;
+    color: $guestBtn;
   }
 }

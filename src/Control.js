@@ -17,7 +17,7 @@ class Control {
 
   totalRevenueForDate(rooms, services, bookings, date) {
     const serviceDates = this.servicesByDate(services, date);
-    const filteredCostsForServices = serviceDates.reduce((acc, currElem) => acc += currElem.totalCost, 0); 
+    const filteredCostsForServices = this.totalServicesEver(serviceDates) 
     const datesBooked = this.bookingsByDate(bookings, date)
     const bookedRooms =  datesBooked.map(room => room.roomNumber)
     const filteredCostForRooms = bookedRooms.reduce((acc, currElem) => {
@@ -30,6 +30,10 @@ class Control {
   percentageOfRoomsOccupied(rooms, bookings, date) {
     const roomsOccupied = rooms.length - this.findRoomsAvailable(rooms, bookings, date).length;
     return Math.floor((roomsOccupied / rooms.length) * 100) + '%'
+  }
+
+  totalServicesEver(services) {
+    return services.reduce((acc, currElem) => acc += currElem.totalCost, 0);
   }
 
   // Should refactor these
@@ -53,9 +57,22 @@ class Control {
   servicesByID(services, id) {
     return services.filter(service => service.userID === id)
   }
+
+  findService(services, id) {
+    return services.find(service => service.id === id)
+  }
   
   bookingsByID(bookings, id) {
     return bookings.filter(booking => booking.userID === id)
+  }
+
+  checkDate(hotel) {
+    if (hotel.selectedDate) {
+      const bookingsForDate = this.bookingsByDate(hotel.bookings, hotel.selectedDate)
+      return this.bookingsByID(bookingsForDate, hotel.selectedCustomer.id)
+    } else {
+      return hotel.bookings
+    }
   }
 }
 

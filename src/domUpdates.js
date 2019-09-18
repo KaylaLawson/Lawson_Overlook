@@ -23,24 +23,38 @@ const domUpdates = {
 
   },
 
-  displayServices(services) {
+  displayServices(services, control) {
     $('#content').empty()
     services.forEach(service => {
       $('#content').append( `
+        <p>Date Ordered: ${service.date}</p>
         <p>Food Order: ${service.food}</p>
+        <input class="update-service-input" type="text" placeholder="Add A Service"/>
+        <button class="update-service-btn" id="${service.id}">Add Service</button>
         <p>Price: $${service.totalCost}</p>
        `)
     })
+    if(control) {
+      $('#content').append(`
+    <p>Total Ever: $${control.totalServicesEver(services)}</p>`)
+    }
   }, 
 
-  displayBookings(bookings) {
+  displayBookings(bookings, rooms) {
     $('#content').empty()
-    bookings.forEach(booking => {
-      $('#content').append( `
+    if (rooms && bookings.length === 0) {
+      rooms.forEach(room => {
+        $('#content').append( ` 
+        <p> ${room.roomType} </p>`)
+      })
+    } else {
+      bookings.forEach(booking => {
+        $('#content').append( `
         <p class="bg1">${booking.date}</p>
         <p class="bg2">Room Number: ${booking.roomNumber}</p>
        `)
-    })
+      })
+    }
   },
 
   displayGuests(guests) {
@@ -49,7 +63,8 @@ const domUpdates = {
       guests.forEach(guest => {
         $('#content').append( `
         <ul>
-          <li class="guest-tab" id=${guest.id}>${guest.name}</li> <button class="remove-guest" id=${guest.id}>X</button>
+          <li class="guest-tab" id=${guest.id}>${guest.name}</li> 
+          <button class="remove-guest" id=${guest.id}>X</button>
         </ul>
          `)
       })
@@ -73,6 +88,7 @@ const domUpdates = {
     $('.selected-guest').empty()
     $('.selected-guest').append(` <p>${guest.name} </p> `)
   }
+
 }
 
 export default domUpdates;
