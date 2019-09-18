@@ -7,18 +7,20 @@
     </head>
   <body>
     <aside>
-      <p class='todays-date daily-view'>Today <span id='currentDate'></span></p>
+      <h2 class='todays-date'>Today is <span class="daily-stat" id='currentDate'></span></h2>
       <form class="search-date daily-view">
         <input type="date" id="searchDate" >
-        <button id="selectedDate" type="submit">blah</button>
+        <button id="selectedDate" type="submit">Submit New Date</button>
       </form>
-        <p class="daily-view">Rooms Available: <span class="daily-stat" id="roomsAvail"></span></p>
-        <p class="daily-view">Total Sales From Services: $<span class="daily-stat" id="revenueToday"></span> </p>
-        <p class="daily-view">occupancy: <span class="daily-stat" id="occupancy"></span> </p>
-        <input class="guest-search" type="text" placeholder="Search Guest">
+        <h2 class="daily-view">Rooms Available: <span class="daily-stat" id="roomsAvail"></span></h2>
+        <h2 class="daily-view">Total Sales: <span class="daily-stat" id="revenueToday"></span> </h2>
+        <h2 class="daily-view">Rooms Occupied: <span class="daily-stat" id="occupancy"></span> </h2>
+        <div class="search-border">
+          <h2 class="daily-view sg-specific">Selected Guest: <span class="selected-guest daily-stat"></span></h2>
+          <input class="guest-search" type="text" placeholder="Search Guest">
+        </div>
         <button id="add-guest">Add Guest +</button>
     </aside>
-    
     <main>
         <nav class="tabs">
           <button class="tab-btn guests" id="guests">GUESTS</button>

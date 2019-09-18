@@ -1,0 +1,26 @@
+ul {
+  display:grid;
+  display: inline-grid;
+  grid-template-columns: auto 50px;
+  margin-left: 40px;
+  width: 28%;
+
+
+  li {
+    list-style: none;
+    margin: 5px;
+  }
+
+  .remove-guest {
+    margin: 5px;
+    border-radius: 25px;
+    background: $btns;
+    border: none;
+    color: white;
+  }
+  .remove-guest:hover {
+    background: white;
+    border: none;
+    color: $btns;
+  }
+}

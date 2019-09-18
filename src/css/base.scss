@@ -1,32 +1,48 @@
 @import 'colors';
-@import 'variables';
 @import 'services';
 @import 'tabs';
 @import 'bookings';
+@import 'guests';
+@import 'aside';
+@import url('https://fonts.googleapis.com/css?family=Hind+Siliguri:300,400,600&display=swap');
 
-* {box-sizing: border-box; margin: 0; padding: 0; };
+* {box-sizing: border-box; margin: 0; padding: 0; cursor: default; font-weight: 400};
 
 
 aside {
-  background-color: $sideNav;
-  height: 100vh;
+  background-color: $sideNavBG;
   padding: 20px;
   font-size: 1.5rem;
-  
+  width: 40%;
+
+  .daily-view {
+    margin: 20px 0;
+  }
+
   #currentDate {
     color: #fff;
-    display: block;
     font-size: 1.5rem;
   }
+
 }
 
 body {
-  background-color: $primaryBg;
+  background-color: $primaryBG;
   display: flex;
 }
 
 main {
-  width: 75%;
+  width: 100%;
+}
+
+ul:hover {
+  background:lightslategray;
+  color: white;
+  cursor: grab;
+}
+
+button:hover {
+  cursor: pointer
 }
 
 
