@@ -14,7 +14,7 @@ const domUpdates = {
   }, 
 
   displayTodaysRevenue(totalRev) {
-    $('#revenueToday').text(totalRev)
+    $('#revenueToday').text('$' + totalRev)
   }, 
 
   displayPercentageOfRoomsOccupied(occ) {
@@ -78,7 +78,7 @@ const domUpdates = {
     $('#content').append(`
     <form>
       <label for="newGuest" class="new-guest"></label>
-      <input id="newGuest" type="text" class="new-guest-name" placeholder="Devin should smile more" >
+      <input id="newGuest" type="text" class="new-guest-name" placeholder="Enter New Guest" >
       <button class="add-guest">Add guest</button> 
     </form>
     `)
