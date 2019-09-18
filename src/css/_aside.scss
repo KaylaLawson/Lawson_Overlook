@@ -89,3 +89,22 @@
     color: #F0E5DD;
   }
 }
+
+.selected-guest {
+  display: flex;
+
+  .guest-btn-remove {
+    margin-left: 10px;
+    border-radius: 25px;
+    background: #422627;
+    border: none;
+    color: white;
+    width: 40px;
+
+    &:hover{
+      background: white;
+      color: #422627;
+      border: none;
+    }
+  }
+}

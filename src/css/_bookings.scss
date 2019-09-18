@@ -1,8 +1,10 @@
-.bg1 {
-  background-color: lightslategray;
-  color: white;
+
+
+#bookings-ul {
+  grid-template-columns: auto auto;
 }
 
-.bg2 {
-  background-color: lightgray;
+.room-info {
+  display: inline-grid;
+  margin: 50px;
 }

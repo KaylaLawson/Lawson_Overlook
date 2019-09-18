@@ -20,6 +20,7 @@ $( document ).ready(async function () {
   const $navBtn =$('.tab-btn');
   const $dateSubmit = $('#selectedDate')
   const $addGuest = $('#add-guest')
+
   const tabs = {
     services: () => domUpdates.displayServices(control.servicesByDate(hotel.services, hotel.selectedDate)),
     bookings: () => domUpdates.displayBookings(control.bookingsByDate(hotel.bookings, hotel.selectedDate)),
@@ -60,6 +61,14 @@ $( document ).ready(async function () {
     }
   })
 
+  $('.selected-guest').click( (e) => {
+    if(e.target.classList.contains('guest-btn-remove')) {
+      $('.selected-guest').empty()
+      hotel.selectedCustomer = null;
+      tabs.guests()
+    }
+  })
+
   $('.content').click(e => {
     e.preventDefault();
     if (e.target.classList.contains('guest-tab')) {
@@ -72,9 +81,9 @@ $( document ).ready(async function () {
     } else if (e.target.classList.contains('remove-guest')) {
       hotel.removeCustomer(parseInt(e.target.id))
       domUpdates.displayGuests(control.guestsByName(hotel.guests, $('.guest-search').val()))
-    } else if (e.target.classList.contains('update-service-btn') && $('.update-service-input').val()) {
+    } else if (e.target.classList.contains('update-service-btn') && $(`.update-service-input-${e.target.id}`).val()) {
       const service = control.findService(hotel.services, parseInt(e.target.id))
-      service.updateFoodItem($('.update-service-input').val());
+      service.updateFoodItem($(`.update-service-input-${e.target.id}`).val());
       hotel.selectedCustomer !== null ? guestTabs.services() : tabs.services()
     }
   })

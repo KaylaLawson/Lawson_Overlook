@@ -26,12 +26,14 @@ const domUpdates = {
   displayServices(services, control) {
     $('#content').empty()
     services.forEach(service => {
-      $('#content').append( `
+      $('#content').append( ` 
+      <section class="service-info">
         <p>Date Ordered: ${service.date}</p>
         <p>Food Order: ${service.food}</p>
-        <input class="update-service-input" type="text" placeholder="Add A Service"/>
-        <button class="update-service-btn" id="${service.id}">Add Service</button>
+        <input class="update-service-input-${service.id}" type="text" placeholder="Change Food"/>
+        <button class="update-service-btn" id="${service.id}">Submit Change</button>
         <p>Price: $${service.totalCost}</p>
+        </section>
        `)
     })
     if(control) {
@@ -45,13 +47,21 @@ const domUpdates = {
     if (rooms && bookings.length === 0) {
       rooms.forEach(room => {
         $('#content').append( ` 
-        <p> ${room.roomType} </p>`)
+        <section class="room-info" > 
+          <h3>Room Type: ${room.roomType} </h3>
+          <p>Bidet: ${room.bidet} </p>
+          <p> Bed Size: ${room.bedSize} </p>
+          <p> Num of Beds: ${room.numBeds} </p>
+          <p> Cost Per Night: ${room.costPerNight} </p>
+        </section> `)
       })
     } else {
       bookings.forEach(booking => {
         $('#content').append( `
-        <p class="bg1">${booking.date}</p>
-        <p class="bg2">Room Number: ${booking.roomNumber}</p>
+        <ul id="bookings-ul">
+          <li class="bg1">${booking.date}</li>
+          <li class="bg2">Room Number: ${booking.roomNumber}</li>
+        </ul>
        `)
       })
     }
@@ -86,7 +96,7 @@ const domUpdates = {
 
   displaySelectedGuest(guest) {
     $('.selected-guest').empty()
-    $('.selected-guest').append(` <p>${guest.name} </p> `)
+    $('.selected-guest').append(` <p>${guest.name} </p> <button class="guest-btn-remove">X</button> `)
   }
 
 }
