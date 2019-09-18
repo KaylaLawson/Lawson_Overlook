@@ -34,3 +34,5 @@ npm install
 To verify that it is setup correctly, run npm start in your terminal. Go to http://localhost:8080/ and you should see the page.
 
 # Screenshots
+
+<img width="1434" alt="Screen Shot 2019-09-18 at 8 36 30 AM" src="https://user-images.githubusercontent.com/37053236/65158407-80091200-d9ef-11e9-9618-773e17521750.png">
